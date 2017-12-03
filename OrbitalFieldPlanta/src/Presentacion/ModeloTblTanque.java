@@ -57,7 +57,7 @@ class ModeloTblTanque extends AbstractTableModel{
                 return Integer.class;
             case 2:
                 return Integer.class;
-            case 4: 
+            case 3: 
                 return CategoriaLeche.class;
         }
         return null;
