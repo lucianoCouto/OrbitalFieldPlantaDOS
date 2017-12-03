@@ -62,28 +62,12 @@ public class Empresa {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Vacas">
-    public void guardarVaca(Vaca v) throws SQLException {
-        this.fachada.getVacaObjectCRUD().guardar(v);
+       public void modificarVaca(int pesoVaca,int idVaca) throws SQLException {
+        this.fachada.getVacaCRUD().modificar(pesoVaca, idVaca);
     }
-
-    public void modificarVaca(Vaca v) throws SQLException {
-        this.fachada.getVacaObjectCRUD().modificar(v);
-    }
-
-    public void eliminarVaca(Vaca v) throws SQLException {
-        this.fachada.getVacaObjectCRUD().eliminar(v);
-    }
-
-    public List<Vaca> listarVacas() {
-        List<Vaca> vacas = new ArrayList<>();
-
-        List<Object> lista = this.fachada.getVacaObjectCRUD().listar();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Vaca v = (Vaca) lista.get(i);
-            vacas.add(v);
-        }
-        return vacas;
+    
+    public Vaca buscarVacaPorCaravana(int caravana){
+        return fachada.getVacaCRUD().buscarVacaPorCaravana(caravana);
     }
     
     public int pesoPromedioDeUltimas5VacasOrdeñadas(String tipoCategoria){
@@ -102,6 +86,9 @@ public class Empresa {
     
     public CategoriaLeche buscarCategoriaXTipo(String tipo){
         return fachada.getCategoriaCRUD().buscarXTipo(tipo);
+    }
+    public CategoriaLeche buscarCategoriaXId(int idCategoria){
+        return fachada.getCategoriaCRUD().buscar(idCategoria);
     }
     // </editor-fold>
     

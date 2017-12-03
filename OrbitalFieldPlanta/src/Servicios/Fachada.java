@@ -19,14 +19,12 @@ public class Fachada {
     private static Fachada instancia;
     private final IObjetoCRUD usuarioObjectCRUD;
     private final IUsuarioCRUD usuarioCRUD;
-    private final IObjetoCRUD vacaObjectCRUD;
     private final IVacaCRUD vacaCRUD;
     private final ICategoriaCRUD categoriaCRUD;
     private final IObjetoCRUD tanqueObjectCRUD;
     private Fachada() {
         this.usuarioObjectCRUD = new UsuarioMysql();
         this.usuarioCRUD = new UsuarioMysql();
-        this.vacaObjectCRUD = new VacaMysql();
         this.categoriaCRUD = new CategoriaMysql();
         this.tanqueObjectCRUD = new TanqueMysql();
         this.vacaCRUD = new VacaMysql();
@@ -46,11 +44,6 @@ public class Fachada {
     public IUsuarioCRUD getUsuarioCRUD(){
         return usuarioCRUD;
     }
-    
-    public IObjetoCRUD getVacaObjectCRUD(){
-        return vacaObjectCRUD;
-    }
-    
     public ICategoriaCRUD getCategoriaCRUD(){
         return categoriaCRUD;
     }

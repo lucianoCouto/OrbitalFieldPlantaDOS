@@ -7,9 +7,12 @@ package Presentacion;
 
 import Dominio.Empresa;
 import Dominio.Usuario;
+import Dominio.Vaca;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,6 +23,7 @@ public class frmInicio extends javax.swing.JFrame {
     Empresa empresa;
     static frmInicio instancia;
     static Usuario u;
+    Vaca vaca;
     /**
      * Creates new form frmInicio
      */
@@ -116,8 +120,12 @@ public class frmInicio extends javax.swing.JFrame {
         if (u.getIdUsuario() > 0) {
             frmMantenimientoVaca frmMV;
             empresa.usuarioIniciado = u;
+            JFrame frame = new JFrame("Introduce el rut del cliente.");
+            int caravana = Integer.parseInt(JOptionPane.showInputDialog(frame, "Introduzca el número de caravana.", "Cliente.", JOptionPane.WARNING_MESSAGE));
+    
+            vaca = empresa.buscarVacaPorCaravana(caravana);
             try {
-                frmMV = frmMantenimientoVaca.getInstancia(empresa);
+                frmMV = frmMantenimientoVaca.getInstancia(empresa, vaca);
                 frmMV.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(frmInicio.class.getName()).log(Level.SEVERE, null, ex);

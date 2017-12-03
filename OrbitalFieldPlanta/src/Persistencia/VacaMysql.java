@@ -6,7 +6,6 @@
 package Persistencia;
 
 import Dominio.Vaca;
-import Servicios.IObjetoCRUD;
 import Servicios.IVacaCRUD;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,53 +15,14 @@ import java.util.List;
  *
  * @author Luciano
  */
-public class VacaMysql extends MySql implements IObjetoCRUD, IVacaCRUD {
+public class VacaMysql extends MySql implements IVacaCRUD {
 
     private final CategoriaMysql categoriaMysql = new CategoriaMysql();
 
     @Override
-    public void guardar(Object o) throws SQLException {
-        Vaca v = (Vaca) o;
-        strSQL = "INSERT INTO vacas (codigo, raza, peso, fechaN, estaActiva, idCategoria) VALUES "
-                + "('" + v.getCodigoVaca() + "', '" + v.getRaza() + "', '" + v.getPeso() + "', '" + v.getFechaDeNacimiento() + "', " + v.getEstaActiva() + ", '" + v.getCategoriaDeLeche().getIdCategoria() + "')";
+    public void modificar(int pesoVaca, int idVaca) {
+        strSQL = "UPDATE vacas SET peso = " + pesoVaca + " WHERE = " + idVaca;
         update(strSQL);
-    }
-
-    @Override
-    public void modificar(Object o) {
-        Vaca v = (Vaca) o;
-        strSQL = "UPDATE vacas SET codigo = " + v.getCodigoVaca() + ", raza = '" + v.getRaza() + "', peso = " + v.getPeso() + ", fechaN = '" + v.getFechaDeNacimiento() + "', estaActiva = " + v.getEstaActiva() + " , idCategoria = " + v.getCategoriaDeLeche().getIdCategoria();
-        update(strSQL);
-    }
-
-    @Override
-    public void eliminar(Object o) {
-        Vaca v = (Vaca) o;
-        strSQL = "UPDATE vacas SET estaActiva = " + false + " WHERE idVaca = " + v.getIdVaca();
-        update(strSQL);
-    }
-
-    @Override
-    public List<Object> listar() {
-        List<Object> objetos = new ArrayList<>();
-        this.seleccionar("SELECT * FROM vacas WHERE estaActiva <>" + false);
-        try {
-            while (rs.next()) {
-                Vaca v = new Vaca();
-                v.setIdVaca(rs.getInt("idVaca"));
-                v.setCodigoVaca(rs.getInt("codigo"));
-                v.setRaza(rs.getString("raza"));
-                v.setPeso(rs.getInt("peso"));
-                v.setFechaDeNacimiento(rs.getString("fechaN"));
-                v.setEstaActiva(rs.getBoolean("estaActiva"));
-                v.setCategoriaDeLeche(categoriaMysql.buscar(rs.getInt("idCategoria")));
-                objetos.add(v);
-            }
-            rs.close();
-        } catch (SQLException ex) {
-            System.err.println("SQLException: " + ex.getMessage());
-        }
-        return objetos;
     }
 
     @Override
@@ -79,5 +39,25 @@ public class VacaMysql extends MySql implements IObjetoCRUD, IVacaCRUD {
             ex.getMessage();
         }
         return pesoPromedio;
+    }
+    public Vaca buscarVacaPorCaravana(int caravana) {
+        Vaca v = new Vaca();
+        String cadena = "SELECT * FROM vacas WHERE idVaca = " + caravana;
+        this.seleccionar(cadena);
+        try {
+            while (rs.next()) {
+                v.setIdVaca(rs.getInt("idVaca"));
+                v.setCodigoVaca(rs.getInt("codigo"));
+                v.setRaza(rs.getString("raza"));
+                v.setPeso(rs.getInt("peso"));
+                v.setFechaDeNacimiento(rs.getString("fechaN"));
+                v.setEstaActiva(rs.getBoolean("estaActiva"));
+                v.setCategoriaDeLeche(categoriaMysql.buscar(rs.getInt("idCategoria")));
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+        return v;
     }
 }
