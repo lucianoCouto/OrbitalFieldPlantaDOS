@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package PresentacionPersonal;
 
-import Dominio.Empresa;
-import Dominio.Tanque;
-import Dominio.Vaca;
+import DominioPersonal.Empresa;
+import DominioPersonal.Tanque;
+import DominioPersonal.Vaca;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,9 +51,9 @@ public class frmMantenimientoVaca extends javax.swing.JFrame {
     private void rellenarCampos(Vaca vaca)
     {
         txtCodigoVaca.setText(String.valueOf(vaca.getCodigoVaca()));
-        txtNacimientoVaca.setText(String.valueOf(vaca.getCodigoVaca()));
-        txtRazaVaca.setText(String.valueOf(vaca.getCodigoVaca()));
-        txtCategoriaLeche.setText(String.valueOf(empresa.buscarCategoriaXId(vaca.getCategoriaDeLeche().getIdCategoria()).getTipoCategoria()));
+        txtNacimientoVaca.setText(vaca.getFechaDeNacimiento());
+        txtRazaVaca.setText(vaca.getRaza());
+        txtCategoriaLeche.setText(empresa.buscarCategoriaXId(vaca.getCategoriaDeLeche().getIdCategoria()).getTipoCategoria());
     }
     private void listarTanques() throws SQLException {
         modeloTblTanque.setDatos(empresa.listarTanques());

@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Servicios;
 
-import Persistencia.CategoriaMysql;
-import Persistencia.TanqueMysql;
-import Persistencia.UsuarioMysql;
-import Persistencia.VacaMysql;
+package ServiciosPersonal;
+import PersistenciaPersonal.CategoriaMysql;
+import PersistenciaPersonal.TanqueMysql;
+import PersistenciaPersonal.UsuarioMysql;
+import PersistenciaPersonal.VacaMysql;
 
 /**
  *
@@ -22,6 +17,7 @@ public class Fachada {
     private final IVacaCRUD vacaCRUD;
     private final ICategoriaCRUD categoriaCRUD;
     private final IObjetoCRUD tanqueObjectCRUD;
+    
     private Fachada() {
         this.usuarioObjectCRUD = new UsuarioMysql();
         this.usuarioCRUD = new UsuarioMysql();

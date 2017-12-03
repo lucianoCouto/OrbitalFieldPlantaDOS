@@ -5,6 +5,8 @@
  */
 package personaldeplanta;
 
+import DominioPersonal.Empresa;
+import PresentacionPersonal.frmInicio;
 /**
  *
  * @author Gian
@@ -15,7 +17,9 @@ public class PersonalDePlanta {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Empresa e = new Empresa();
+        frmInicio inicio = new frmInicio(e);
+        inicio.setVisible(true);
     }
-    
+
 }

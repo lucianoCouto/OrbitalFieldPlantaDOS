@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Persistencia;
+package PersistenciaPersonal;
 
-import Dominio.Vaca;
-import Servicios.IVacaCRUD;
+import DominioPersonal.Vaca;
+import ServiciosPersonal.IVacaCRUD;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -21,7 +19,7 @@ public class VacaMysql extends MySql implements IVacaCRUD {
 
     @Override
     public void modificar(int pesoVaca, int idVaca) {
-        strSQL = "UPDATE vacas SET peso = " + pesoVaca + " WHERE = " + idVaca;
+        strSQL = "UPDATE vacas SET peso = " + pesoVaca + " WHERE idVaca = " + idVaca;
         update(strSQL);
     }
 
@@ -40,9 +38,11 @@ public class VacaMysql extends MySql implements IVacaCRUD {
         }
         return pesoPromedio;
     }
+    
+    @Override
     public Vaca buscarVacaPorCaravana(int caravana) {
         Vaca v = new Vaca();
-        String cadena = "SELECT * FROM vacas WHERE idVaca = " + caravana;
+        String cadena = "SELECT * FROM vacas WHERE codigo = " + caravana;
         this.seleccionar(cadena);
         try {
             while (rs.next()) {

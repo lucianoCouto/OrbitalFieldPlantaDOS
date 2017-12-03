@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package PresentacionPersonal;
 
-import Dominio.Empresa;
-import Dominio.Usuario;
-import Dominio.Vaca;
+import DominioPersonal.Empresa;
+import DominioPersonal.Usuario;
+import DominioPersonal.Vaca;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +24,7 @@ public class frmInicio extends javax.swing.JFrame {
     static frmInicio instancia;
     static Usuario u;
     Vaca vaca;
+
     /**
      * Creates new form frmInicio
      */
@@ -38,7 +39,7 @@ public class frmInicio extends javax.swing.JFrame {
         }
         return instancia;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -122,17 +123,19 @@ public class frmInicio extends javax.swing.JFrame {
             empresa.usuarioIniciado = u;
             JFrame frame = new JFrame("Introduce el rut del cliente.");
             int caravana = Integer.parseInt(JOptionPane.showInputDialog(frame, "Introduzca el número de caravana.", "Cliente.", JOptionPane.WARNING_MESSAGE));
-    
+
             vaca = empresa.buscarVacaPorCaravana(caravana);
-            try {
-                frmMV = frmMantenimientoVaca.getInstancia(empresa, vaca);
-                frmMV.setVisible(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(frmInicio.class.getName()).log(Level.SEVERE, null, ex);
+            if (vaca.getIdVaca() > 0) {
+                try {
+                    frmMV = frmMantenimientoVaca.getInstancia(empresa, vaca);
+                    frmMV.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(frmInicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                dispose();
+            } else {
+                this.lblMensajeInicioSesion.setText("Nombre de usuario y/o contraseña incorrectos.");
             }
-            dispose();
-        } else {
-            this.lblMensajeInicioSesion.setText("Nombre de usuario y/o contraseña incorrectos.");
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
 

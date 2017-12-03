@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Persistencia;
+package PersistenciaPersonal;
 
-import Dominio.Tanque;
-import Servicios.IObjetoCRUD;
+import DominioPersonal.Tanque;
+import ServiciosPersonal.IObjetoCRUD;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

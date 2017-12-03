@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package PresentacionPersonal;
 
-import Dominio.CategoriaLeche;
-import Dominio.Tanque;
+import DominioPersonal.CategoriaLeche;
+import DominioPersonal.Tanque;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 

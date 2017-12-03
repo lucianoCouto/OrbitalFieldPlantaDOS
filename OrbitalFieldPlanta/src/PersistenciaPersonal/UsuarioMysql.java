@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Persistencia;
+package PersistenciaPersonal;
 
-import Dominio.Usuario;
-import Servicios.IObjetoCRUD;
-import Servicios.IUsuarioCRUD;
+import DominioPersonal.Usuario;
+import ServiciosPersonal.IObjetoCRUD;
+import ServiciosPersonal.IUsuarioCRUD;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class UsuarioMysql extends MySql implements IObjetoCRUD, IUsuarioCRUD {
     @Override
     public Usuario buscarUsuarioXNombreYContrasena(String usuario, String contrasena) {
         Usuario u = new Usuario();
-        String cadena = "SELECT * FROM usuarios WHERE nombreUsuario = '" + usuario + "' AND contrasena = '" + contrasena + "' AND tipo <> 'Encargado de planta'";
+        String cadena = "SELECT * FROM usuarios WHERE nombreUsuario = '" + usuario + "' AND contrasena = '" + contrasena + "' AND tipo = 'Encargado de planta'";
         this.seleccionar(cadena);
         try {
             while (rs.next()) {
