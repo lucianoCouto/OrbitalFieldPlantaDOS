@@ -60,4 +60,11 @@ public class VacaMysql extends MySql implements IVacaCRUD {
         }
         return v;
     }
+
+    @Override
+    public void ordenie(int idVaca, int idTanque, int cantidad)
+    {
+        strSQL = "INSERT INTO ordeñe (idVaca, idTanque, cantidad) VALUES " + "('" + idVaca + "', '" + idTanque + "', '" + cantidad + "')";
+        update(strSQL);
+    }
 }

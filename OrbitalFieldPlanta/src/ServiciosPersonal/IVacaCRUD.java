@@ -15,4 +15,5 @@ public interface IVacaCRUD {
     public int pesoPromedioDeUltimas5VacasOrdeñadas(String tipoCategoria);
     public Vaca buscarVacaPorCaravana(int caravana);
     public void modificar(int pesoV, int idVaca);
+    public void ordenie(int idVaca, int idTanque, int cantidad);
 }

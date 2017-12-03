@@ -25,7 +25,6 @@ public class frmMantenimientoVaca extends javax.swing.JFrame {
     static frmMantenimientoVaca instancia;
     Tanque tanque;
     Vaca v;
-    
     private final ModeloTblTanque modeloTblTanque;
     private final ListSelectionModel lsmTanques;
     
@@ -64,10 +63,7 @@ public class frmMantenimientoVaca extends javax.swing.JFrame {
         public void valueChanged(ListSelectionEvent e) {
             int select = tblTanques.getSelectedRow();
             if (select != -1) {
-                
-                txtRazaVaca.setText(String.valueOf(tanque.getCantLitros()));
-                txtCategoriaLeche.setText(String.valueOf(tanque.getTopeDeLitros()));
-                txtNacimientoVaca.setText(String.valueOf(tanque.getTopeDeLitros()));
+                tanque = modeloTblTanque.getTanque(select);
             }
         }
     }
@@ -343,8 +339,10 @@ public class frmMantenimientoVaca extends javax.swing.JFrame {
     private void btnCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarDatosActionPerformed
         int pesoVaca = Integer.parseInt(this.txtPesoVaca.getText());
         int idVaca = v.getIdVaca();
+        int cantidad = Integer.parseInt(this.txtCantidadLecheOrdenada.getText());
         try {
             empresa.modificarVaca(pesoVaca, idVaca);
+            empresa.ordenie(idVaca, tanque.getIdTanque(), cantidad);
         } catch (SQLException ex) {
             Logger.getLogger(frmMantenimientoVaca.class.getName()).log(Level.SEVERE, null, ex);
         }

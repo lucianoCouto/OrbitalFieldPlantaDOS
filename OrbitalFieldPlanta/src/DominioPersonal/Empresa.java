@@ -118,4 +118,9 @@ public class Empresa {
     }
     // </editor-fold>
     
+    public void ordenie(int idVaca, int idTanque, int cantidad)
+    {
+        this.fachada.getVacaCRUD().ordenie(idVaca, idTanque, cantidad);
+    }
+    
 }
