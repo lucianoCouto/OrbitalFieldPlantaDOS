@@ -85,6 +85,10 @@ public class Empresa {
         }
         return vacas;
     }
+    
+    public int pesoPromedioDeUltimas5VacasOrdeñadas(String tipoCategoria){
+        return fachada.getVacaCRUD().pesoPromedioDeUltimas5VacasOrdeñadas(tipoCategoria);
+    }
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Categorias">

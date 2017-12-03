@@ -16,7 +16,7 @@ public class Vaca {
     private int codigoVaca;
     private String raza;
     private int peso;
-    private Date fechaDeNacimiento;
+    private String fechaDeNacimiento;
     private boolean estaActiva;
     private CategoriaLeche categoriaDeLeche;
 
@@ -52,11 +52,11 @@ public class Vaca {
         this.peso = peso;
     }
 
-    public Date getFechaDeNacimiento() {
+    public String getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
-    public void setFechaDeNacimiento(Date fechaDeNacimiento) {
+    public void setFechaDeNacimiento(String fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 

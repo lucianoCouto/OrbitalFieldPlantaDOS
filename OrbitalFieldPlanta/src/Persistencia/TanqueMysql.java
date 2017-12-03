@@ -6,7 +6,6 @@
 package Persistencia;
 
 import Dominio.Tanque;
-import Servicios.Fachada;
 import Servicios.IObjetoCRUD;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import java.util.List;
  */
 public class TanqueMysql extends MySql implements IObjetoCRUD {
 
-    private final Fachada fachada = Fachada.getInstancia();
+    private final CategoriaMysql categoriaMysql = new CategoriaMysql();
 
     @Override
     public void guardar(Object o) throws SQLException {
@@ -31,7 +30,7 @@ public class TanqueMysql extends MySql implements IObjetoCRUD {
     @Override
     public void modificar(Object o) {
         Tanque t = (Tanque) o;
-        strSQL = "UPDATE tanques SET numero = '" + t.getNumero() + "', cantLitros = '" + t.getCantLitros() + "', topeTanque = " + t.getTopeDeLitros() + "', idCategoria = " + t.getCategoria().getIdCategoria() + " WHERE idTanque = " + t.getIdTanque();
+        strSQL = "UPDATE tanques SET numero = " + t.getNumero() + ", cantLitros = " + t.getCantLitros() + ", topeTanque = " + t.getTopeDeLitros() + ", idCategoria = " + t.getCategoria().getIdCategoria() + " WHERE idTanque = " + t.getIdTanque();
         update(strSQL);
     }
 
@@ -45,7 +44,7 @@ public class TanqueMysql extends MySql implements IObjetoCRUD {
     @Override
     public List<Object> listar() {
         List<Object> objetos = new ArrayList<>();
-        this.seleccionar("SELECT * FROM usuarios");
+        this.seleccionar("SELECT * FROM tanques");
         try {
             while (rs.next()) {
                 Tanque t = new Tanque();
@@ -53,7 +52,7 @@ public class TanqueMysql extends MySql implements IObjetoCRUD {
                 t.setCantLitros(rs.getInt("cantLitros"));
                 t.setTopeDeLitros(rs.getInt("topeTanque"));
                 t.setNumero(rs.getInt("numero"));
-                t.setCategoria(fachada.getCategoriaCRUD().buscar(rs.getInt("idCategoria")));
+                t.setCategoria(categoriaMysql.buscar(rs.getInt("idCategoria")));
                 objetos.add(t);
             }
             rs.close();
